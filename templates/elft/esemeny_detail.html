@@ -18,9 +18,9 @@
         {% endfor %}
           </p>
           {% endif %}
-          <p class="place">Helyszín: {{ eloadas.helyszin.nev }},<br />
+          <p class="place">Helyszín: {{ eloadas.helyszin.nev }},<br>
           &nbsp;&nbsp;
-          {{ eloadas.helyszin.helyszin.telepules }}, {{ eloadas.helyszin.cim }}{% if eloadas.terem %},<br />
+          {{ eloadas.helyszin.helyszin.telepules }}, {{ eloadas.helyszin.cim }}{% if eloadas.terem %},<br>
           &nbsp;&nbsp;
           {{ eloadas.terem }}
           {% endif %}
@@ -40,7 +40,7 @@
         {% if eloadas.szervezok.count %}
         <p class="lecturer">Szervező{{ eloadas.szervezok.count|pluralize:"k" }}:
           {% for sz in eloadas.szervezok.all %}
-          <br/>&nbsp;&nbsp;&nbsp;
+          <br>&nbsp;&nbsp;&nbsp;
           <a href="../szervezet/{{ sz.id }}/">{{ sz.nev}}</a>
           {% endfor %}
           </p>
