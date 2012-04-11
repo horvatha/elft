@@ -18,7 +18,7 @@ def szemely(request, object_id):
     r += u"{0}\n</br>\n".format(szemely.leiras)
     r += u"Előadásai az adatbázisunkban:\n<ul>\n"
     for eloadas in eloadasok:
-            r += u" <it>{0}</it>\n".format(eloadas.nev)
+            r += u" <li>{0}</li>\n".format(eloadas.nev)
     r += "</ul>"
 
     return HttpResponse(r)
