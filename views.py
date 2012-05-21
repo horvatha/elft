@@ -12,14 +12,16 @@ def szemely(request, object_id):
     szemely = Szemely.objects.get(id=object_id)
     szemelynevek = szemely.szemelynev_set.all()
     eloadasok = []
+    r = u"<html>\n<body>\n"
     for szemelynev in szemelynevek:
         eloadasok.extend(szemelynev.eloadas_set.all())
-    r = u"<h1>{0} oldala</h1>\n".format(szemely.nev)
-    r += u"{0}\n</br>\n".format(szemely.leiras)
+    r += u"<h1>{0} oldala</h1>\n".format(szemely.nev)
+    r += u"{0}\n<br>\n".format(szemely.leiras)
     r += u"Előadásai az adatbázisunkban:\n<ul>\n"
     for eloadas in eloadasok:
-            r += u" <it>{0}</it>\n".format(eloadas.nev)
+            r += u" <li>{0}</li>\n".format(eloadas.nev)
     r += "</ul>"
+    r += u"\n</body>\n</html>"
 
     return HttpResponse(r)
 
