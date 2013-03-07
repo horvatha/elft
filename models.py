@@ -270,7 +270,7 @@ class Eloadas(Esemeny):
     leiras = models.TextField(u"leírás", help_text=u"Ide írhat egy rövid összefoglalást az előadásról.", blank=True)
     meghivo = models.ForeignKey("Dokumentum",
         verbose_name=u"meghívó",
-        help_text="Tipikusan az a fájl, amelyből az előadás plakátja készült.",
+        help_text=u"Tipikusan az a fájl, amelyből az előadás plakátja készült.",
         blank=True, null=True,
         )
     kategoriak = models.ManyToManyField(Kategoria, blank=True,
@@ -278,16 +278,19 @@ class Eloadas(Esemeny):
         )
     szervezok = models.ManyToManyField(Szervezetnev, blank=True,
         verbose_name="szervezők",
-        help_text="Szervező szervezetek nevei.",
+        help_text=u"Szervező szervezetek nevei.",
         )
     letszam = models.IntegerField("létszám",
-        help_text="A résztvevők létszáma az előadó(k) nélkül.",
+        help_text=u"A résztvevők létszáma az előadó(k) nélkül.",
         blank=True, null=True)
     kep = models.ForeignKey("Kep",
         verbose_name=u'címkép',
         help_text = u"Ez a kép fog megjelenni az események listájánál kicsiben és az előadás oldalán nagyban.",
         blank=True, null=True,
         )
+    url = models.URLField("honlap",
+        help_text=u"A honlap, ahol az eseményről többet lehet megtudni.",
+        blank=True, null=True)
 
 
 class Ules(Esemeny):

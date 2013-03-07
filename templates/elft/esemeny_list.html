@@ -4,7 +4,9 @@
 {% block title %} &ndash; Események {% endblock title %}
 {% block torzs %}
 
+<!--
 Évek rendezvényei: <a href="2009">2009</a> - <a href="2010">2010</a> - <a href="2011">2011</a>
+-->
 
 {% if object_list %}
     {% for esemeny in object_list %}
@@ -14,7 +16,10 @@
     {%ifequal esemeny.tipus "verseny"%}style="background-color:#e4ffe4;"{%endifequal%}
     {%ifequal esemeny.tipus "diakmuhely"%}style="background-color:#ffffdd;"{%endifequal%}
     >
-    <p class="date">{{ esemeny.datum|date:"Y. F d. l" }}{% if esemeny.ido%}, {{esemeny.ido|time:"H:i"}}{%endif%}
+    <p class="date">{{ esemeny.datum|date:"Y. F j. l" }}{% if esemeny.ido%}, {{esemeny.ido|time:"H:i"}}{%endif%}
+    {% if esemeny.vegdatum or esemeny.vegido %} – {%endif%}
+    {% if esemeny.vegdatum%} {{esemeny.vegdatum|date:"Y. F j. l"}}{%endif%}
+    {% if esemeny.vegido%}{% if esemeny.vegdatum%},{%endif%} {{esemeny.vegido|time:"H:i"}}{%endif%}
           </p>
           <p class="title"> <a href="../esemeny/{{ esemeny.id }}/">{{ esemeny.nev }}</a>
           </p>
@@ -38,6 +43,11 @@
           {%if esemeny.eloadas.kep %}
           <p>
           <img src="{{esemeny.eloadas.kep.kep.url}}">
+          </p>
+          {% endif %}
+          {% if esemeny.eloadas.url %}
+          <p>
+          <a href="{{esemeny.eloadas.url}}">Bővebben</a>
           </p>
           {% endif %}
         {% if esemeny.eloadas.meghivo %}
