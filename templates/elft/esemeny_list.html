@@ -1,115 +1,32 @@
 {% extends "elft/base.html" %}
 
-{% block cim %}Események fordított időrendben {% endblock cim %}
-{% block title %} &ndash; Események {% endblock title %}
+{% block title %} &ndash; Események, {{year}} {% endblock title %}
+{% block cim %}{{year}}. év eseményei időrendben {% endblock cim %}
 {% block torzs %}
 
-<!--
-Évek rendezvényei: <a href="2009">2009</a> - <a href="2010">2010</a> - <a href="2011">2011</a>
--->
+<div class="navigation">
+{% if previous_year %}
+  <a href="../{{previous_year}}">Előző év</a>
+{% else %}
+  (Előző év nincs tárolva)
+{% endif %}
+ –
+  <a href="../">Főoldal</a>
+ –
+{% if next_year %}
+  <a href="../{{next_year}}">Következő év</a>
+{% else %}
+  (Következő év nincs tárolva)
+{% endif %}
+</div>
 
-{% if object_list %}
-    {% for esemeny in object_list %}
-    <div class="item"
-    {%ifequal esemeny.tipus "ülés"%}style="background-color:#ffe4e4;"{%endifequal%}
-    {%ifequal esemeny.tipus "előadás"%}style="background-color:#e4e4ff;"{%endifequal%}
-    {%ifequal esemeny.tipus "verseny"%}style="background-color:#e4ffe4;"{%endifequal%}
-    {%ifequal esemeny.tipus "diakmuhely"%}style="background-color:#ffffdd;"{%endifequal%}
-    >
-    <p class="date">{{ esemeny.datum|date:"Y. F j. l" }}{% if esemeny.ido%}, {{esemeny.ido|time:"H:i"}}{%endif%}
-    {% if esemeny.vegdatum or esemeny.vegido %} – {%endif%}
-    {% if esemeny.vegdatum%} {{esemeny.vegdatum|date:"Y. F j. l"}}{%endif%}
-    {% if esemeny.vegido%}{% if esemeny.vegdatum%},{%endif%} {{esemeny.vegido|time:"H:i"}}{%endif%}
-          </p>
-          <p class="title"> <a href="../esemeny/{{ esemeny.id }}/">{{ esemeny.nev }}</a>
-          </p>
-
-          {#{esemeny.eloadas_set.get.eloado.count}#}
-    {%ifequal esemeny.tipus "előadás"%}
-          {% if esemeny.eloadas.eloado.count %}
-          <p class="lecturer"><b>Előadó{{ esemeny.eloadas.eloado.count|pluralize:"k" }}:</b>
-        {% for ea in esemeny.eloadas.eloado.all %}
-        <a href="../szemely/{{ ea.szemely.id }}/">{{ ea.nevvaltozat }}</a> {{ea.titulus}}{% if not forloop.last %},{% endif %}
-        {% endfor %}
-          </p>
-          {% endif %}
-          <p class="place"><b>Helyszín:</b> {{ esemeny.eloadas.eloadas.helyszin.nev }},<br>
-          &nbsp;&nbsp;
-          {{ esemeny.eloadas.helyszin.helyszin.telepules }}, {{ esemeny.eloadas.helyszin.cim }}{% if esemeny.eloadas.terem %},<br>
-          &nbsp;&nbsp;
-          {{ esemeny.eloadas.terem }}
-          {% endif %}
-          </p>
-          {%if esemeny.eloadas.kep %}
-          <p>
-          <img src="{{esemeny.eloadas.kep.kep.url}}">
-          </p>
-          {% endif %}
-          {% if esemeny.eloadas.url %}
-          <p>
-          <a href="{{esemeny.eloadas.url}}">Bővebben</a>
-          </p>
-          {% endif %}
-        {% if esemeny.eloadas.meghivo %}
-
-          <p class="link">
-	  <a href="http://django.arek.uni-obuda.hu/media/{{esemeny.eloadas.meghivo.nev}}">Meghívó</a>
-          </p>
-        {% endif %}
-    {% endifequal %} {# eloadas #}
-
-    {%ifequal esemeny.tipus "ülés"%}
-          {% if esemeny.ules.eloado.count %}
-          <p class="lecturer"><b>Előadó{{ esemeny.ules.eloado.count|pluralize:"k" }}:</b>
-        {% for ea in esemeny.ules.eloado.all %}
-        <a href="../szemely/{{ ea.szemely.id }}/">{{ ea.nevvaltozat }}</a> {{ea.titulus}}{% if not forloop.last %},{% endif %}
-        {% endfor %}
-          </p>
-          {% endif %}
-          <p class="place"><b>Helyszín:</b> {{ esemeny.ules.helyszin.helyszin.nev }},<br>
-          &nbsp;&nbsp;
-          {{ esemeny.ules.helyszin.helyszin.telepules }}, {{ esemeny.ules.helyszin.cim }}{% if esemeny.ules.terem %},<br>
-          &nbsp;&nbsp;
-          {{ esemeny.ules.terem }}
-          {% endif %}
-          </p>
-          {%if esemeny.ules.kep %}
-          <p>
-          <img src="{{esemeny.ules.kep.kep.url}}">
-          </p>
-          {% endif %}
-        {% if esemeny.ules.meghivo %}
-
-          <p class="link">
-	  <a href="http://django.arek.uni-obuda.hu/media/{{esemeny.ules.meghivo.nev}}">Meghívó</a>
-          </p>
-        {% endif %}
-    {% endifequal %} {# ules #}
-
-
-
-
-    </div>
+{% if events %}
+    {% for esemeny in events %}
+        {% include "elft/event.html" %}
     {% endfor %} {# esemeny #}
 {% else %}
     <p>Nincs előadás az adatbázisunkban ebből az évből. Ha tud ilyen
     előadásról jelezze nekünk a lap alján található elérési lehetőségek egyikén.</p>
 {% endif %}
 
-      <hr>
-      <h2>Csillagvizsgáló </h2>
-      <p style="align:justify;">Felhívjuk figyelmét, hogy a Terkán Lajos
-Bemutató Csillagvizsgálóban (A Szabadművelődés Háza, Székesfehérvár, Fürdő sor
-3.) a tanítási időszak nagy részében távcsöves bemutatót tartunk.  Pontos
-időtartamok iránt érdeklődhetnek az alábbi elérhetőségeken.</p>
-      <p style="align:justify;">Szakköreink egész évben folyamatosan működnek a
-művelődési ház nyári zárvatartását kivéve. Hétfőnként 17 órától általános
-iskolásoknak, péntekenként 18 órától középiskolásoknak.</p>
-      <p style="align:justify;"> A csillagda honlapjai a <a
-          href="http://telapo.datatrans.hu">
-http://telapo.datatrans.hu</a> és a <a href="http://telapo.zapto.org">
-http://telapo.zapto.org</a> címen találhatóak az interneten. Email-címünk:
-      <a href="mailto:telapo@datatrans.hu">telapo@datatrans.hu</a>.</p>
-      <p style="align:justify;">Minden érdeklődőt szeretettel várunk! </p>
-      <hr>
 {% endblock torzs %}

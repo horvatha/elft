@@ -1,3 +1,5 @@
+Lehet, hogy már nem igaz az alábbi.
+
 Az elft alkalmazás telepítése kicsit trükkös.
 Az Ules osztályban van egy ilyen rész:
 

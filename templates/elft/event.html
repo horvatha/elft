@@ -1,0 +1,77 @@
+<div class="item"
+{%ifequal esemeny.tipus "ülés"%}style="background-color:#ffe4e4;"{%endifequal%}
+{%ifequal esemeny.tipus "előadás"%}style="background-color:#e4e4ff;"{%endifequal%}
+{%ifequal esemeny.tipus "verseny"%}style="background-color:#e4ffe4;"{%endifequal%}
+{%ifequal esemeny.tipus "diakmuhely"%}style="background-color:#ffffdd;"{%endifequal%}
+>
+<p class="date">{{ esemeny.datum|date:"Y. F j. l" }}{% if esemeny.ido%}, {{esemeny.ido|time:"H:i"}}{%endif%}
+{% if esemeny.vegdatum or esemeny.vegido %} – {%endif%}
+{% if esemeny.vegdatum%} {{esemeny.vegdatum|date:"Y. F j. l"}}{%endif%}
+{% if esemeny.vegido%}{% if esemeny.vegdatum%},{%endif%} {{esemeny.vegido|time:"H:i"}}{%endif%}
+      </p>
+      <p class="title"> <a href="http://django.arek.uni-obuda.hu/django/elft/esemeny/{{ esemeny.id }}/">{{ esemeny.nev }}</a>
+      </p>
+
+      {#{esemeny.eloadas_set.get.eloado.count}#}
+{%ifequal esemeny.tipus "előadás"%}
+      {% if esemeny.eloadas.eloado.count %}
+      <p class="lecturer"><b>Előadó{{ esemeny.eloadas.eloado.count|pluralize:"k" }}:</b>
+    {% for ea in esemeny.eloadas.eloado.all %}
+    <a href="http://django.arek.uni-obuda.hu/django/elft/szemely/{{ ea.szemely.id }}/">{{ ea.nevvaltozat }}</a> {{ea.titulus}}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+      </p>
+      {% endif %}
+      <p class="place"><b>Helyszín:</b> {{ esemeny.eloadas.eloadas.helyszin.nev }},<br>
+      &nbsp;&nbsp;
+      {{ esemeny.eloadas.helyszin.helyszin.telepules }}, {{ esemeny.eloadas.helyszin.cim }}{% if esemeny.eloadas.terem %},<br>
+      &nbsp;&nbsp;
+      {{ esemeny.eloadas.terem }}
+      {% endif %}
+      </p>
+      {%if esemeny.eloadas.kep %}
+      <div class="event_image">
+      <img class="event" src="{{esemeny.eloadas.kep.kep.url}}">
+      </div>
+      {% endif %}
+      {% if esemeny.eloadas.url %}
+      <p>
+      <a href="{{esemeny.eloadas.url}}">Bővebben</a>
+      </p>
+      {% endif %}
+    {% if esemeny.eloadas.meghivo %}
+
+      <p class="link">
+      <a href="http://django.arek.uni-obuda.hu/media/{{esemeny.eloadas.meghivo.nev}}">Meghívó</a>
+      </p>
+    {% endif %}
+{% endifequal %} {# eloadas #}
+
+{%ifequal esemeny.tipus "ülés"%}
+      {% if esemeny.ules.eloado.count %}
+      <p class="lecturer"><b>Előadó{{ esemeny.ules.eloado.count|pluralize:"k" }}:</b>
+    {% for ea in esemeny.ules.eloado.all %}
+    <a href="http://django.arek.uni-obuda.hu/django/elft/szemely/{{ ea.szemely.id }}/">{{ ea.nevvaltozat }}</a> {{ea.titulus}}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+      </p>
+      {% endif %}
+      <p class="place"><b>Helyszín:</b> {{ esemeny.ules.helyszin.helyszin.nev }},<br>
+      &nbsp;&nbsp;
+      {{ esemeny.ules.helyszin.helyszin.telepules }}, {{ esemeny.ules.helyszin.cim }}{% if esemeny.ules.terem %},<br>
+      &nbsp;&nbsp;
+      {{ esemeny.ules.terem }}
+      {% endif %}
+      </p>
+      {%if esemeny.ules.kep %}
+      <p>
+      <img src="{{esemeny.ules.kep.kep.url}}">
+      </p>
+      {% endif %}
+    {% if esemeny.ules.meghivo %}
+
+      <p class="link">
+      <a href="http://django.arek.uni-obuda.hu/media/{{esemeny.ules.meghivo.nev}}">Meghívó</a>
+      </p>
+    {% endif %}
+{% endifequal %} {# ules #}
+
+</div>

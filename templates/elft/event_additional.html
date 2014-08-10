@@ -1,0 +1,48 @@
+{%ifequal esemeny.tipus "ülés"%}
+ {%if esemeny.ules.jegyzokonyv %}
+   <a href="http://django.arek.uni-obuda.hu/media/{{esemeny.ules.jegyzokonyv.nev}}">Az ülés jegyzőkönyve</a>
+ {% endif %}
+
+{% if esemeny.ules.kategoriak.count %}
+<div class="categories">
+    <b>Kategóri{{ esemeny.ules.kategoriak.count|pluralize:"a,ák" }}:</b>
+    {% for kat in esemeny.ules.kategoriak.all %}
+    <a href="http://django.arek.uni-obuda.hu/django/elft/kategoria/{{ kat.id }}">{{ kat.kategoria }}</a>{% if not forloop.last %},{% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endifequal %}
+
+{%ifequal esemeny.tipus "előadás"%}
+{% if esemeny.eloadas.szervezok.count %}
+<div class="organizers">
+    <b>Szervező{{ esemeny.eloadas.szervezok.count|pluralize:"k" }}:</b>
+    {% for sz in esemeny.eloadas.szervezok.all %}
+    {{ sz.nevvaltozat }}{% if not forloop.last %},{% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if esemeny.eloadas.letszam %}
+<div class="numVisitors">
+    <b>Látogatók létszáma:</b>
+    {{ esemeny.eloadas.letszam }}
+</div>
+{% endif %}
+
+{% if esemeny.eloadas.kategoriak.count %}
+<div class="categories">
+    <b>Kategóri{{ esemeny.eloadas.kategoriak.count|pluralize:"a,ák" }}:</b>
+    {% for kat in esemeny.eloadas.kategoriak.all %}
+    <a href="http://django.arek.uni-obuda.hu/django/elft/kategoria/{{ kat.id }}">{{ kat.kategoria }}</a>{% if not forloop.last %},{% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if esemeny.eloadas.leiras %}
+<div class="descriptionlink">
+    <a href="http://django.arek.uni-obuda.hu/django/elft/esemeny/{{ esemeny.id }}/leiras">Esemény leírása</a>
+</div>
+{% endif %}
+
+{% endifequal %}

@@ -1,0 +1,18 @@
+{% extends "elft/base.html" %}
+
+{% block title %} &ndash; {{kategoria.kategoria|capfirst}} kategória {% endblock title %}
+
+{% block cim %} {{kategoria.kategoria|capfirst}} kategória előadásai {% endblock cim %}
+
+
+{% block torzs %}
+
+
+{% for esemeny in eloadasok %}
+    {% include "elft/event.html" %}
+{% endfor %} {# esemeny #}
+{% for esemeny in ulesek %}
+    {% include "elft/event.html" %}
+{% endfor %} {# esemeny #}
+{% endblock torzs %}
+

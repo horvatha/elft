@@ -13,32 +13,44 @@ public in the field of astronomy and physics">
   href="http://django.arek.uni-obuda.hu/media/icons/elft4.ico"> 
   <style type="text/css">
 p.title {
-  font-weight: bold;
-  font-style: italic;
+  font-size: 15pt;
   text-align: justify;
 }
 h1, h2, h3 {
-  color: #000080;
+  color: #007070;
+}
+div.main_navigation {
+  text-align: center;
+  padding: 10px 30px;
+  background-color: #ffffdd;
+  margin: 20px 10px;
+}
+div.navigation {
+  text-align: center;
+  padding: 10px 30px;
+  background-color: #ffffdd;
+  margin: 20px 80px;
 }
 div.item {
   border: 1px outset #b3b3b3;
-  padding: 10px 30px;
+  padding: 10px 15px;
   background-color: #f6f6f6;
-  margin: 30px;
+  margin: 30px 10px;
 }
 p.title, p.date, p.lecturer, p.link, p.place {
   margin-top: 4px;
   margin-bottom: 4px;
 }
-/*a {
+a {
   text-decoration: none;
-  font-weight: 600;
-}*/
+  font-weight: 700;
+}
 h1, h2 {
   text-align: center;
 }
-p.logo {
+div.logo {
   text-align: center;
+  margin: 10px 5px;
 }
 div.main {
   background: white;
@@ -47,6 +59,9 @@ div.main {
   margin-right: auto;
   margin-left: auto;
   width: 800px;
+}
+img.event {
+  max-width: 100%;
 }
 hr {
   color: #a085f9;
@@ -59,31 +74,31 @@ body {
 
   </style>
 </head><body>
-<div style="" class="main">
-  
-      <p style="margin-top: 0pt; text-align:center" >
-      <a href="http://django.arek.uni-obuda.hu/django/elft/naptar/2011/">Idei év rendezvényei</a> –
+<div class="main">
+    <div class="main_navigation">
+      <a href="http://django.arek.uni-obuda.hu/django/elft/naptar/">Eseménynaptár főoldala</a> –
       <a href="http://www.kfki.hu/~elftfeje/rendezvenyek">Rendezvények
           régi archívuma</a> –
       <a href="http://www.kfki.hu/~elftfeje/">A Megyei Csoport főoldala</a> –
       <a
       href="http://django.arek.uni-obuda.hu/django/admin">Adminisztráció</a>
-      </p>
-      <hr>
-      <p class="logo"><img style="width: 103px; height: 134px;"
+    </div>
+
+      <div class="logo"><img style="width: 103px; height: 134px;"
       src="http://django.arek.uni-obuda.hu/media/icons/eotvost_k.jpg"
       alt="Eötvös Loránt Fizikai Társulat"><img style="
       height: 134px;"
       src="http://django.arek.uni-obuda.hu/media/icons/fejer_cimer.gif" alt="Fejér
-      Megye címere"></p>
+      Megye címere"></div>
+
       <h1>ELFT Fejér Megyei Csoport</h1>
-      <h2>{% block cim%}{{ year }}-es rendezvénynaptár{% endblock%}</h2>
+      <h2>{% block cim%}{% endblock%}</h2>
 
 {% block torzs %}
 {% endblock torzs %}
       
 {% block eszrevetel %}
-      <p style="margin-top: 4px; text-align: left;">Az ezzel az oldallal
+      <p style="margin-top: 30px; text-align: left;">Az ezzel az oldallal
 kapcsolatos észrevételeket <a href="http://www.arek.uni-obuda.hu/harp/elerhetoseg.html">Horváth
 Árpádnak</a>
 és/vagy <a href="mailto:elftfeje@mail.kfki.hu">Dr. Hudoba Györgynek</a>

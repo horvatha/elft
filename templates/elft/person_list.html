@@ -1,0 +1,16 @@
+{% extends "elft/base.html" %}
+
+{% block title %} &ndash; Előadók listája {% endblock title %}
+
+{% block cim %} Előadók listája {% endblock cim %}
+
+
+{% block torzs %}
+
+<p>
+{% for person in persons %}
+    <a href="../szemely/{{person.id}}">{{person.nev}}</a>{% if not forloop.last %} – {% endif %}
+{% endfor %}
+</p>
+{% endblock torzs %}
+

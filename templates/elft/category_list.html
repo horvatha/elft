@@ -1,0 +1,16 @@
+{% extends "elft/base.html" %}
+
+{% block title %} &ndash; Kategóriák listája {% endblock title %}
+
+{% block cim %} Kategóriák listája {% endblock cim %}
+
+
+{% block torzs %}
+
+<p>
+{% for category in categories %}
+    <a href="{{category.id}}">{{category.kategoria}}</a>{% if not forloop.last %} – {% endif %}
+{% endfor %}
+</p>
+{% endblock torzs %}
+

@@ -40,7 +40,7 @@ class Dokumentum(models.Model):
         verbose_name_plural=u"dokumentumok"
         ordering = ['nev']
     def __unicode__(self):
-        return self.cim
+        return u"{0} ({1})".format(self.cim, self.nev)
 #TODO nev->file vagy dokumentum
     nev = models.FileField('dokumentum', upload_to=dokumentumok)
     cim = models.CharField('dokumentum címe', max_length=100, blank=True)

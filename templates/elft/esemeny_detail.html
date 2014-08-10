@@ -2,52 +2,13 @@
 
 {% block title %} &ndash; Esemény részletei {% endblock title %}
 
+{% block cim %} Esemény részletei {% endblock cim %}
+
+{{esemeny.id}}
 
 {% block torzs %}
+    {% include "elft/event.html" %}
 
-    <div class="item" {%ifequal object.tipus "ülés"%}style="background-color:#ffe4e4;"{%endifequal%}>
-	  <p class="date">{{ object.datum|date:"Y. F d. l" }}, {{object.ido|time:"H:i"}}
-          </p>
-          <p class="title"> {{ object.nev }} </p>
-
-    {% for eloadas in object.eloadas_set.all %}
-          {% if eloadas.eloado.count %}
-          <p class="lecturer">Előadó{{ eloadas.eloado.count|pluralize:"k" }}:
-        {% for ea in eloadas.eloado.all %}
-        <a href="../szemely/{{ ea.id }}/">{{ ea.nevvaltozat }}</a> {{ea.titulus}}{% if not forloop.last %},{% endif %}
-        {% endfor %}
-          </p>
-          {% endif %}
-          <p class="place">Helyszín: {{ eloadas.helyszin.nev }},<br>
-          &nbsp;&nbsp;
-          {{ eloadas.helyszin.helyszin.telepules }}, {{ eloadas.helyszin.cim }}{% if eloadas.terem %},<br>
-          &nbsp;&nbsp;
-          {{ eloadas.terem }}
-          {% endif %}
-          </p>
-          {%if eloadas.kep %}
-          <p>
-          <img src="{{eloadas.kep.kep.url}}">
-          </p>
-          {% endif %}
-
-        {% if eloadas.meghivo %}
-          <p class="link">
-	  <a href="{{eloadas.meghivo.nev.url}}">Meghívó</a>
-          </p>
-        {% endif %}
-
-        {% if eloadas.szervezok.count %}
-        <p class="lecturer">Szervező{{ eloadas.szervezok.count|pluralize:"k" }}:
-          {% for sz in eloadas.szervezok.all %}
-          <br>&nbsp;&nbsp;&nbsp;
-          <a href="../szervezet/{{ sz.id }}/">{{ sz.nev}}</a>
-          {% endfor %}
-          </p>
-        {% endif %}
-    {% endfor %} {# eloadas #}
-
-
-    </div>
+    {% include "elft/event_additional.html" %}
 {% endblock torzs %}
 

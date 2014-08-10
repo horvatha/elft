@@ -1,0 +1,43 @@
+{% extends "elft/base.html" %}
+
+{% block title %} &ndash; {{szemely.nev}} oldala {% endblock title %}
+
+{% block cim %} {{szemely.nev}} oldala {% endblock cim %}
+
+
+{% block torzs %}
+
+{%if szemely.arckep %}
+    <p>
+    <img src="{{szemely.arckep.kep.url}}" style="max-width:100%" alt="{{szemely.nev}} arcképe">
+    </p>
+{% endif %}
+
+{%if "" %}
+{%if szemely.email %}
+{%if szemely.nyilvanosemail %}
+    <p>
+    <b>Email-címe:</b> <a href="mailto:{{szemely.email}}">{{szemely.email}}</a>
+    </p>
+{% endif %}
+{% endif %}
+{% endif %}
+
+{%if szemely.honlap %}
+    <p>
+    <a href="{{szemely.honlap}}">Honlapja</a>
+    </p>
+{% endif %}
+
+<h3>Előadásai az adatbázisunkban</h3>
+
+{% if esemenyek %}
+    {% for esemeny in esemenyek %}
+        {% include "elft/event.html" %}
+    {% endfor %} {# esemeny #}
+{% else %}
+    <p>Nincs előadása az adatbázisunkban. Ha tud ilyen előadásról jelezze
+    nekünk a lap alján található elérési lehetőségek egyikén.</p>
+{% endif %}
+{% endblock torzs %}
+

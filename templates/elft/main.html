@@ -1,0 +1,41 @@
+{% extends "elft/base.html" %}
+
+{% block title %} &ndash; Főoldal {% endblock title %}
+
+{% block cim %} Eseménynaptár főoldala {% endblock cim %}
+
+
+{% block torzs %}
+Ezen az oldalon tájékozódhat az Eötvös Loránd Fizikai Társulat Fejér Megyei
+Csoportjának eseményeiről.
+
+<div class="navigation">
+    <a href="http://django.arek.uni-obuda.hu/django/elft/szemely/">Előadóink listája</a> –
+    <a href="http://django.arek.uni-obuda.hu/django/elft/kategoria/">Kategóriák listája</a> –
+    <a href="http://django.arek.uni-obuda.hu/django/elft/naptar/{{idei_ev}}">Idei teljes eseménynaptárunk</a>
+</div>
+
+<h3>Elkövetkező események</h3>
+{% if esemenyek %}
+    {% for esemeny in esemenyek %}
+        {% include "elft/event.html" %}
+    {% endfor %} {# esemeny #}
+{% else %}
+    <p>Nincs elkövetkező esemény az adatbázisunkban. Ha tud ilyen
+    előadásról jelezze nekünk a lap alján található elérési lehetőségek egyikén.</p>
+{% endif %}
+
+<h3>Események az adatbázisban</h3>
+
+<div>
+    Összesen {{all_count}} esemény van az adatbázisunkban, amely az alábbiak szerint oszlik el az évek között.
+</div>
+
+{% for year in year_count %}
+<a href="http://django.arek.uni-obuda.hu/django/elft/naptar/{{year.year}}">{{year.year}}. év</a> ({{year.count}} esemény) {% if not forloop.last %} – {% endif %}
+{% endfor %}
+
+
+{% include "elft/csillagda.html" %}
+
+{% endblock torzs %}
