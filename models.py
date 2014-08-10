@@ -50,38 +50,38 @@ class Dokumentum(models.Model):
 
     def __unicode__(self):
         return u"{0} ({1})".format(self.cim, self.nev)
-# TODO nev->file vagy dokumentum
-nev = models.FileField('dokumentum', upload_to=dokumentumok)
-cim = models.CharField('dokumentum címe', max_length=100, blank=True)
-leiras = models.TextField(
-    "leírás",
-    help_text="Ide írhat egy összefoglalást a dokumentumról. (Miről szól, rövid tartalom...)",
-    blank=True
-)
-szemelyek = models.ManyToManyField(
-    "Szemely",
-    verbose_name=u"személyek",
-    help_text="Személyek, akik a dokumentumhoz köthetőek. Például a szerzője, vagy akiről szól.",
-    blank=True
-)
-eloadasok = models.ManyToManyField(
-    "Esemeny",
-    verbose_name=u"események",
-    help_text="Események, amelyeknek a dokumentumhoz közük van.",
-    blank=True
-)
-helyszinek = models.ManyToManyField(
-    "Helyszin",
-    verbose_name=u"helyszínek",
-    help_text="A helyszínek, amelyeknek a dokumentumhoz közük van.",
-    blank=True
-)
-szervezetek = models.ManyToManyField(
-    "Szervezet",
-    verbose_name=u"szervezetek",
-    help_text="A szervezetek, amelyeknek a dokumentumhoz közük van.",
-    blank=True
-)
+    # TODO nev->file vagy dokumentum
+    nev = models.FileField('dokumentum', upload_to=dokumentumok)
+    cim = models.CharField('dokumentum címe', max_length=100, blank=True)
+    leiras = models.TextField(
+        "leírás",
+        help_text="Ide írhat egy összefoglalást a dokumentumról. (Miről szól, rövid tartalom...)",
+        blank=True
+    )
+    szemelyek = models.ManyToManyField(
+        "Szemely",
+        verbose_name=u"személyek",
+        help_text="Személyek, akik a dokumentumhoz köthetőek. Például a szerzője, vagy akiről szól.",
+        blank=True
+    )
+    eloadasok = models.ManyToManyField(
+        "Esemeny",
+        verbose_name=u"események",
+        help_text="Események, amelyeknek a dokumentumhoz közük van.",
+        blank=True
+    )
+    helyszinek = models.ManyToManyField(
+        "Helyszin",
+        verbose_name=u"helyszínek",
+        help_text="A helyszínek, amelyeknek a dokumentumhoz közük van.",
+        blank=True
+    )
+    szervezetek = models.ManyToManyField(
+        "Szervezet",
+        verbose_name=u"szervezetek",
+        help_text="A szervezetek, amelyeknek a dokumentumhoz közük van.",
+        blank=True
+    )
 
 
 class Kep(models.Model):
