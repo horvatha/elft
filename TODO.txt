@@ -1,0 +1,17 @@
+Javítások
+============
+CSS, JavaScript fájlok kiszolgálása
+Mediafájlok kiszolgálása
+Korábbi CSS és JavaScript fájlok törlése
+Megoldani a README.txt-ben levő hibát.
+
+Adatok bővítése
+=================
+Képeket feltölteni előadókról
+
+Fejlesztés
+============
+Eseményeknél Szervezőket is kiíratni
+Szervezők szerint is keresni.
+Ajax-os keresés
+
