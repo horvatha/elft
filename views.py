@@ -1,7 +1,7 @@
 # encoding: utf-8
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render_to_response
-from models import Szemely, Esemeny, Kategoria
+from elft.models import Szemely, Esemeny, Kategoria
 import datetime
 
 min_year = 1970
@@ -100,16 +100,16 @@ def event(request, object_id):
 
 def event_description(request, object_id):
     event = Esemeny.objects.get(id=object_id)
-    if event.tipus == u"előadás" and event.eloadas.leiras:
+    if event.tipus == "előadás" and event.eloadas.leiras:
         return HttpResponse(event.eloadas.leiras, "text/plain")
     else:
-        return HttpResponseNotFound(u"Nem tartozik leírás az eseményhez.")
+        return HttpResponseNotFound("Nem tartozik leírás az eseményhez.")
 
 
 def year(request, year):
     year = int(year)
     max_year = datetime.date.today().year+1
-    error_mesg = (u'<h1>{year} kívül esik a tárolt tartományból'
+    error_mesg = ('<h1>{year} kívül esik a tárolt tartományból'
                   ' ({min_year}-{max_year})</h1>')
     if not min_year <= year <= max_year:
         return HttpResponseNotFound(

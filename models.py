@@ -16,11 +16,11 @@ def dokumentumok(instance, filename):
 
 class Telepules(models.Model):
     class Meta:
-        verbose_name = u"település"
-        verbose_name_plural = u"települések"
+        verbose_name = "település"
+        verbose_name_plural = "települések"
         ordering = ['nev']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nev
     megyek = list(enumerate((
         "Budapest", "Pest", "Fejér", "Komárom-Esztergom",
@@ -44,12 +44,12 @@ class Telepules(models.Model):
 
 class Dokumentum(models.Model):
     class Meta:
-        verbose_name = u"dokumentum"
-        verbose_name_plural = u"dokumentumok"
+        verbose_name = "dokumentum"
+        verbose_name_plural = "dokumentumok"
         ordering = ['nev']
 
-    def __unicode__(self):
-        return u"{0} ({1})".format(self.cim, self.nev)
+    def __str__(self):
+        return "{0} ({1})".format(self.cim, self.nev)
     # TODO nev->file vagy dokumentum
     nev = models.FileField('dokumentum', upload_to=dokumentumok)
     cim = models.CharField('dokumentum címe', max_length=100, blank=True)
@@ -60,25 +60,25 @@ class Dokumentum(models.Model):
     )
     szemelyek = models.ManyToManyField(
         "Szemely",
-        verbose_name=u"személyek",
+        verbose_name="személyek",
         help_text="Személyek, akik a dokumentumhoz köthetőek. Például a szerzője, vagy akiről szól.",
         blank=True
     )
     eloadasok = models.ManyToManyField(
         "Esemeny",
-        verbose_name=u"események",
+        verbose_name="események",
         help_text="Események, amelyeknek a dokumentumhoz közük van.",
         blank=True
     )
     helyszinek = models.ManyToManyField(
         "Helyszin",
-        verbose_name=u"helyszínek",
+        verbose_name="helyszínek",
         help_text="A helyszínek, amelyeknek a dokumentumhoz közük van.",
         blank=True
     )
     szervezetek = models.ManyToManyField(
         "Szervezet",
-        verbose_name=u"szervezetek",
+        verbose_name="szervezetek",
         help_text="A szervezetek, amelyeknek a dokumentumhoz közük van.",
         blank=True
     )
@@ -86,12 +86,13 @@ class Dokumentum(models.Model):
 
 class Kep(models.Model):
     class Meta:
-        verbose_name = u"kép"
-        verbose_name_plural = u"képek"
+        verbose_name = "kép"
+        verbose_name_plural = "képek"
         ordering = ['cim']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.cim
+
     kep = models.ImageField('kép', upload_to=kepek)
     cim = models.CharField('kép címe', max_length=100, blank=True)
     leiras = models.TextField(
@@ -101,25 +102,25 @@ class Kep(models.Model):
     )
     szemelyek = models.ManyToManyField(
         "Szemely",
-        verbose_name=u"személyek",
+        verbose_name="személyek",
         help_text="A személyek, akik a képen szerepelnek, vagy a képhez közük van.",
         blank=True
     )
     eloadasok = models.ManyToManyField(
         "Esemeny",
-        verbose_name=u"események",
+        verbose_name="események",
         help_text="Események, amelyek a képen szerepelnek, vagy a képhez közük van.",
         blank=True
     )
     helyszinek = models.ManyToManyField(
         "Helyszin",
-        verbose_name=u"helyszínek",
+        verbose_name="helyszínek",
         help_text="A helyszínek, amelyek a képen szerepelnek, vagy a képhez közük van.",
         blank=True
     )
     szervezetek = models.ManyToManyField(
         "Szervezet",
-        verbose_name=u"szervezetek",
+        verbose_name="szervezetek",
         help_text="A szervezetek, amelyeknek a képhez közük van.",
         blank=True
     )
@@ -127,12 +128,12 @@ class Kep(models.Model):
 
 class Helyszin(models.Model):
     class Meta:
-        verbose_name = u"helyszín"
-        verbose_name_plural = u"helyszínek"
+        verbose_name = "helyszín"
+        verbose_name_plural = "helyszínek"
         ordering = ['nev']
 
-        def __unicode__(self):
-            return self.nev
+    def __str__(self):
+        return self.nev
 
     nev = models.CharField(
         "Jelenlegi név", max_length=100, unique=True,
@@ -156,12 +157,12 @@ class Helyszin(models.Model):
 
 class Helyszinnev(models.Model):
     class Meta:
-        verbose_name = u"helyszínnév"
-        verbose_name_plural = u"helyszínnevek"
+        verbose_name = "helyszínnév"
+        verbose_name_plural = "helyszínnevek"
         ordering = ['nev']
 
-        def __unicode__(self):
-            return "%s, %s" % (self.nev, self.cim)
+    def __str__(self):
+        return "%s, %s" % (self.nev, self.cim)
 
     helyszin = models.ForeignKey(Helyszin, verbose_name="település")
     nev = models.CharField("Helyszín neve", max_length=200)
@@ -170,24 +171,24 @@ class Helyszinnev(models.Model):
 
 class Kategoria(models.Model):
     class Meta:
-        verbose_name = u"kategória"
-        verbose_name_plural = u"kategóriák"
+        verbose_name = "kategória"
+        verbose_name_plural = "kategóriák"
         ordering = ['kategoria']
 
-        def __unicode__(self):
-            return self.kategoria
+    def __str__(self):
+        return self.kategoria
 
     kategoria = models.CharField('kategória', max_length=60)
 
 
 class Szemely(models.Model):
     class Meta:
-        verbose_name = u"személy"
-        verbose_name_plural = u"személyek"
+        verbose_name = "személy"
+        verbose_name_plural = "személyek"
         ordering = ['nev']
 
-        def __unicode__(self):
-            return self.nev
+    def __str__(self):
+        return self.nev
 
     nev = models.CharField(
         'személy neve', max_length=200, unique=True,
@@ -218,12 +219,12 @@ class Szemely(models.Model):
 
 class Szemelynev(models.Model):
     class Meta:
-        verbose_name = u"személynév"
-        verbose_name_plural = u"személynevek"
+        verbose_name = "személynév"
+        verbose_name_plural = "személynevek"
         ordering = ['nevvaltozat']
 
-        def __unicode__(self):
-            return "%s, %s" % (self.nevvaltozat, self.titulus)
+    def __str__(self):
+        return "%s, %s" % (self.nevvaltozat, self.titulus)
 
     szemely = models.ForeignKey(Szemely, verbose_name="személy")
     nevvaltozat = models.CharField('előadó neve', max_length=200)
@@ -234,12 +235,12 @@ class Szemelynev(models.Model):
 
 class Szervezet(models.Model):
     class Meta:
-        verbose_name = u"szervezet"
-        verbose_name_plural = u"szervezetek"
+        verbose_name = "szervezet"
+        verbose_name_plural = "szervezetek"
         ordering = ['nev']
 
-        def __unicode__(self):
-            return self.nev
+    def __str__(self):
+        return self.nev
 
     nev = models.CharField(
         "szervezet jelenlegi neve", max_length=200, unique=True,
@@ -256,20 +257,20 @@ class Szervezet(models.Model):
     honlap = models.URLField("honlap", max_length=256, blank=True)
     logo = models.ForeignKey(
         "Kep",
-        verbose_name=u'logó',
-        help_text=u"Logo, vagy más a szervezetre jellemző kép. Ez a kép fog megjelenni a szervezet oldalán a főrészben.",
+        verbose_name='logó',
+        help_text="Logo, vagy más a szervezetre jellemző kép. Ez a kép fog megjelenni a szervezet oldalán a főrészben.",
         blank=True, null=True,
         )
 
 
 class Szervezetnev(models.Model):
     class Meta:
-        verbose_name = u"szervezetnév"
-        verbose_name_plural = u"szervezetnevek"
+        verbose_name = "szervezetnév"
+        verbose_name_plural = "szervezetnevek"
         ordering = ['nevvaltozat']
 
-        def __unicode__(self):
-            return self.nevvaltozat
+    def __str__(self):
+        return self.nevvaltozat
 
     szervezet = models.ForeignKey(Szervezet, verbose_name="szervezet")
     nevvaltozat = models.CharField(
@@ -279,20 +280,20 @@ class Szervezetnev(models.Model):
 
 class Esemeny(models.Model):
     class Meta:
-        verbose_name = u"esemény"
-        verbose_name_plural = u"események"
+        verbose_name = "esemény"
+        verbose_name_plural = "események"
         ordering = ['nev']
 
-        def __unicode__(self):
-            return self.nev
+    def __str__(self):
+        return self.nev
 
     tipusok = (
-        (u"előadás", "Önálló előadás"),
-        (u"ülés", "Társulati ülés"),
-        (u"verseny", "Verseny"),
-        (u"konf", "Konferencia"),
-        (u"csill", "Csillagászati esemény"),
-        (u"műhely", "Diákműhely"),
+        ("előadás", "Önálló előadás"),
+        ("ülés", "Társulati ülés"),
+        ("verseny", "Verseny"),
+        ("konf", "Konferencia"),
+        ("csill", "Csillagászati esemény"),
+        ("műhely", "Diákműhely"),
     )
     nev = models.CharField(
         "esemény neve", max_length=200,
@@ -319,14 +320,14 @@ class Esemeny(models.Model):
 class Eloadas(Esemeny):
     """Önálló előadás. Nem konferencián vagy tárulati ülésen elhangzó."""
     class Meta:
-        verbose_name = u"előadás"
-        verbose_name_plural = u"előadások"
+        verbose_name = "előadás"
+        verbose_name_plural = "előadások"
 
-        def __unicode__(self):
-            return "%s, %s" % (self.nev, self.datum)
+    def __str__(self):
+        return "%s, %s" % (self.nev, self.datum)
 
     def save(self, *args, **kwargs):
-        self.tipus = u"előadás"
+        self.tipus = "előadás"
         super(Eloadas, self).save(*args, **kwargs)
 
     eloado = models.ManyToManyField(Szemelynev,
@@ -339,13 +340,13 @@ class Eloadas(Esemeny):
     )
     terem = models.CharField(max_length=50, blank=True)
     leiras = models.TextField(
-        u"leírás",
-        help_text=u"Ide írhat egy rövid összefoglalást az előadásról.",
+        "leírás",
+        help_text="Ide írhat egy rövid összefoglalást az előadásról.",
         blank=True)
     meghivo = models.ForeignKey(
         "Dokumentum",
-        verbose_name=u"meghívó",
-        help_text=u"Tipikusan az a fájl, amelyből az előadás plakátja készült.",
+        verbose_name="meghívó",
+        help_text="Tipikusan az a fájl, amelyből az előadás plakátja készült.",
         blank=True, null=True,
     )
     kategoriak = models.ManyToManyField(Kategoria, blank=True,
@@ -354,35 +355,35 @@ class Eloadas(Esemeny):
     szervezok = models.ManyToManyField(
         Szervezetnev, blank=True,
         verbose_name="szervezők",
-        help_text=u"Szervező szervezetek nevei.",
+        help_text="Szervező szervezetek nevei.",
         )
     letszam = models.IntegerField(
         "létszám",
-        help_text=u"A résztvevők létszáma az előadó(k) nélkül.",
+        help_text="A résztvevők létszáma az előadó(k) nélkül.",
         blank=True, null=True)
     kep = models.ForeignKey(
         "Kep",
-        verbose_name=u'címkép',
-        help_text=u"Ez a kép fog megjelenni az események listájánál kicsiben és az előadás oldalán nagyban.",
+        verbose_name='címkép',
+        help_text="Ez a kép fog megjelenni az események listájánál kicsiben és az előadás oldalán nagyban.",
         blank=True, null=True,
         )
     url = models.URLField(
         "honlap",
-        help_text=u"A honlap, ahol az eseményről többet lehet megtudni.",
+        help_text="A honlap, ahol az eseményről többet lehet megtudni.",
         blank=True, null=True)
 
 
 class Ules(Esemeny):
     """Társulati vagy más ülés."""
     class Meta:
-        verbose_name = u"ülés"
-        verbose_name_plural = u"ülések"
+        verbose_name = "ülés"
+        verbose_name_plural = "ülések"
 
     def save(self, *args, **kwargs):
-        self.tipus = u"ülés"
+        self.tipus = "ülés"
         super(Ules, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s, %s" % (self.nev, self.datum)
 
     helyszin = models.ForeignKey(
@@ -420,7 +421,7 @@ class Ules(Esemeny):
         Szervezetnev,
         verbose_name="szervezet",
         help_text="Melyik szervezet ülése.",
-        default=Szervezet.objects.get(nev__startswith="ELFT Fejér").id,
+        #default=Szervezet.objects.get(nev__startswith="ELFT Fejér").id,
     )
     letszam = models.IntegerField(
         "létszám",
@@ -428,7 +429,7 @@ class Ules(Esemeny):
         blank=True, null=True)
     kep = models.ForeignKey(
         "Kep",
-        verbose_name=u'címkép',
-        help_text=u"Ez a kép fog megjelenni az események listájánál kicsiben és az előadás oldalán nagyban.",
+        verbose_name='címkép',
+        help_text="Ez a kép fog megjelenni az események listájánál kicsiben és az előadás oldalán nagyban.",
         blank=True, null=True,
         )
