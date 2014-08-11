@@ -10,9 +10,9 @@ Ezen az oldalon tájékozódhat az Eötvös Loránd Fizikai Társulat Fejér Meg
 Csoportjának eseményeiről.
 
 <div class="navigation">
-    <a href="http://django.arek.uni-obuda.hu/django/elft/szemely/">Előadóink listája</a> –
-    <a href="http://django.arek.uni-obuda.hu/django/elft/kategoria/">Kategóriák listája</a> –
-    <a href="http://django.arek.uni-obuda.hu/django/elft/naptar/{{idei_ev}}">Idei teljes eseménynaptárunk</a>
+    <a href="{% url 'person_list' %}">Előadóink listája</a> –
+    <a href="{% url 'category_list' %}">Kategóriák listája</a> –
+    <a href="{% url 'year' idei_ev %}">Idei teljes eseménynaptárunk</a>
 </div>
 
 <h3>Elkövetkező események</h3>
@@ -32,7 +32,7 @@ Csoportjának eseményeiről.
 </div>
 
 {% for year in year_count %}
-<a href="http://django.arek.uni-obuda.hu/django/elft/naptar/{{year.year}}">{{year.year}}. év</a> ({{year.count}} esemény) {% if not forloop.last %} – {% endif %}
+<a href="{% url 'year' year.year %}">{{year.year}}. év</a> ({{year.count}} esemény) {% if not forloop.last %} – {% endif %}
 {% endfor %}
 
 
