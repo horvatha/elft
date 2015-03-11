@@ -378,13 +378,14 @@ class Ules(Esemeny):
     class Meta:
         verbose_name = "ülés"
         verbose_name_plural = "ülések"
+        ordering = ["-datum"]
 
     def save(self, *args, **kwargs):
         self.tipus = "ülés"
         super(Ules, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "%s, %s" % (self.nev, self.datum)
+        return "{} {}".format(self.datum, self.nev)
 
     helyszin = models.ForeignKey(
         Helyszinnev,

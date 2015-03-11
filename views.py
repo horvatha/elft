@@ -75,7 +75,7 @@ def categories(request):
 
 def category(request, object_id):
     category = Kategoria.objects.get(id=object_id)
-    lessions = category.eloadas_set.all()
+    lessions = category.eloadas_set.order_by("-datum", "-ido")
     ulesek = category.ules_set.all()
 
     return render_to_response(
