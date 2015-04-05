@@ -33,7 +33,9 @@ class SzervezetAdmin(admin.ModelAdmin):
 
 class EsemenyAdmin(admin.ModelAdmin):
     exclude = ('tipus', )
-    list_display = ('datum', 'nev')
+    list_display = ('nev', 'datum')
+    list_filter = ('datum',)
+    search_fields = ('nev',)
 
 
 admin.site.register(Telepules)
