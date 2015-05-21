@@ -422,7 +422,7 @@ class Ules(Esemeny):
         Szervezetnev,
         verbose_name="szervezet",
         help_text="Melyik szervezet ülése.",
-        #default=Szervezet.objects.get(nev__startswith="ELFT Fejér").id,
+        default=Szervezet.objects.get(nev__startswith="ELFT Fejér").id,
     )
     letszam = models.IntegerField(
         "létszám",

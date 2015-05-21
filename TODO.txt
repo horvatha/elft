@@ -3,7 +3,8 @@ Javítások
 CSS, JavaScript fájlok kiszolgálása
 Mediafájlok kiszolgálása
 Korábbi CSS és JavaScript fájlok törlése
-Megoldani a README.txt-ben levő hibát.
+Megoldani a README.txt-ben levő hibát a társulati ülések default
+   értékeivel kapcsolatban
 
 Adatok bővítése
 =================
