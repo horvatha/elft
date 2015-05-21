@@ -36,7 +36,11 @@ class Telepules(models.Model):
     nev = models.CharField("település neve", max_length=100, unique=True)
     megye = models.IntegerField(
         "megye (vagy ország)", choices=megyek, blank=True, null=True,
-        help_text="Magyar településeknél válassza ki a megyét, szomszédos országoknál az ország nevét, más esetekben a \"nem szomszédos ország\" lehetőséget. <br>\nAz utóbbi esetben a település neve után írhatja az ország nevét vesszővel elválasztva."
+        help_text=("Magyar településeknél válassza ki a megyét, "
+                   "szomszédos országoknál az ország nevét, "
+                   "más esetekben a \"nem szomszédos ország\" lehetőséget. "
+                   "<br>\nAz utóbbi esetben a település neve után "
+                   "írhatja az ország nevét vesszővel elválasztva.")
     )
     longitude = models.FloatField("földrajzi hosszúság", blank=True, null=True)
     latitude = models.FloatField("földrajzi szélesség", blank=True, null=True)
@@ -55,13 +59,15 @@ class Dokumentum(models.Model):
     cim = models.CharField('dokumentum címe', max_length=100, blank=True)
     leiras = models.TextField(
         "leírás",
-        help_text="Ide írhat egy összefoglalást a dokumentumról. (Miről szól, rövid tartalom...)",
+        help_text=("Ide írhat egy összefoglalást a dokumentumról. "
+                   "(Miről szól, rövid tartalom...)"),
         blank=True
     )
     szemelyek = models.ManyToManyField(
         "Szemely",
         verbose_name="személyek",
-        help_text="Személyek, akik a dokumentumhoz köthetőek. Például a szerzője, vagy akiről szól.",
+        help_text=("Személyek, akik a dokumentumhoz köthetőek. "
+                   "Például a szerzője, vagy akiről szól."),
         blank=True
     )
     eloadasok = models.ManyToManyField(
@@ -97,25 +103,29 @@ class Kep(models.Model):
     cim = models.CharField('kép címe', max_length=100, blank=True)
     leiras = models.TextField(
         "leírás",
-        help_text="Ide írhat egy összefoglalást a képről. (Mi szerepel rajta, érdekességek...)",
+        help_text=("Ide írhat egy összefoglalást a képről. "
+                   "(Mi szerepel rajta, érdekességek...)"),
         blank=True
     )
     szemelyek = models.ManyToManyField(
         "Szemely",
         verbose_name="személyek",
-        help_text="A személyek, akik a képen szerepelnek, vagy a képhez közük van.",
+        help_text=("A személyek, akik a képen szerepelnek, "
+                   "vagy a képhez közük van."),
         blank=True
     )
     eloadasok = models.ManyToManyField(
         "Esemeny",
         verbose_name="események",
-        help_text="Események, amelyek a képen szerepelnek, vagy a képhez közük van.",
+        help_text=("Események, amelyek a képen szerepelnek, "
+                   "vagy a képhez közük van."),
         blank=True
     )
     helyszinek = models.ManyToManyField(
         "Helyszin",
         verbose_name="helyszínek",
-        help_text="A helyszínek, amelyek a képen szerepelnek, vagy a képhez közük van.",
+        help_text=("A helyszínek, amelyek a képen szerepelnek, "
+                   "vagy a képhez közük van."),
         blank=True
     )
     szervezetek = models.ManyToManyField(
@@ -137,11 +147,15 @@ class Helyszin(models.Model):
 
     nev = models.CharField(
         "Jelenlegi név", max_length=100, unique=True,
-        help_text="Ez jelenik meg a helyszín oldalán. Az előadásoknál megjelenő névváltozatok (névváltozási, címváltozás) más táblában szerepelnek."
+        help_text=("Ez jelenik meg a helyszín oldalán. "
+                   "Az előadásoknál megjelenő névváltozatok "
+                   "(névváltozási, címváltozás) más táblában szerepelnek.")
     )
-    leiras = models.TextField("leírás",
-                              help_text="Ide írhat egy összefoglalást a helyszínről. (Megközelítés, honlap, kapcsolati információk...)",
-                              blank=True)
+    leiras = models.TextField(
+        "leírás",
+        help_text=("Ide írhat egy összefoglalást a helyszínről. "
+                   "(Megközelítés, honlap, kapcsolati információk...)"),
+        blank=True)
     telepules = models.ForeignKey(Telepules, verbose_name="település")
     iranyitoszam = models.IntegerField("irányítószám", blank=True, null=True)
     email = models.EmailField(
@@ -192,17 +206,24 @@ class Szemely(models.Model):
 
     nev = models.CharField(
         'személy neve', max_length=200, unique=True,
-        help_text="Ez csak azonosításra szolgál. A honlapon megjelenő névváltozatok (doktorral vagy anélkül, lánykori vagy házas) más táblában szerepelnek.")
+        help_text=(
+            "Ez csak azonosításra szolgál. "
+            "A honlapon megjelenő névváltozatok (doktorral vagy anélkül, "
+            "lánykori vagy házas) más táblában szerepelnek.")
+    )
     leiras = models.TextField(
         "leírás",
-        help_text="Ide írhat egy összefoglalást a személyről. (Munkahelyek, kitüntetések, eredmények...)",
+        help_text=("Ide írhat egy összefoglalást a személyről. "
+                   "(Munkahelyek, kitüntetések, eredmények...)"),
         blank=True)
     email = models.EmailField(
         'e-mail címe', max_length=60, blank=True,
         help_text="Az pillanatnyilag érvényben lévő címe.")
     nyilvanosemail = models.BooleanField(
         "nyilvános email?",
-        help_text="Akkor állítsuk igaz értékre, ha nem bejelentkezett felhasználók is láthatják. Ekkor megjelenik a személy adatlapján.",
+        help_text=("Akkor állítsuk igaz értékre, "
+                   "ha nem bejelentkezett felhasználók is láthatják. "
+                   "Ekkor megjelenik a személy adatlapján."),
         default=False)
     honlap = models.URLField(
         max_length=256,
@@ -247,9 +268,11 @@ class Szervezet(models.Model):
         help_text="Ami a neve mellett megjelenik a szervezet oldalán.")
     szulo = models.ManyToManyField(
         "self",
-        blank=True, null=True,
+        blank=True,
         verbose_name="szülő szervezet",
-        help_text="Amely szervezetnek része a szervezet. Pl. Az ELFT Fejér Megyei Csoport szülője az ELFT.")
+        help_text=("Amely szervezetnek része a szervezet. "
+                   "Pl. Az ELFT Fejér Megyei Csoport szülője az ELFT.")
+    )
     telepules = models.ForeignKey(Telepules,
                                   blank=True, null=True,
                                   verbose_name="település",
@@ -258,7 +281,8 @@ class Szervezet(models.Model):
     logo = models.ForeignKey(
         "Kep",
         verbose_name='logó',
-        help_text="Logo, vagy más a szervezetre jellemző kép. Ez a kép fog megjelenni a szervezet oldalán a főrészben.",
+        help_text=("Logo, vagy más a szervezetre jellemző kép. "
+                   "Ez a kép fog megjelenni a szervezet oldalán a főrészben."),
         blank=True, null=True,
         )
 
@@ -364,7 +388,9 @@ class Eloadas(Esemeny):
     kep = models.ForeignKey(
         "Kep",
         verbose_name='címkép',
-        help_text="Ez a kép fog megjelenni az események listájánál kicsiben és az előadás oldalán nagyban.",
+        help_text=("Ez a kép fog megjelenni az "
+                   "események listájánál kicsiben "
+                   "és az előadás oldalán nagyban."),
         blank=True, null=True,
         )
     url = models.URLField(
@@ -431,6 +457,8 @@ class Ules(Esemeny):
     kep = models.ForeignKey(
         "Kep",
         verbose_name='címkép',
-        help_text="Ez a kép fog megjelenni az események listájánál kicsiben és az előadás oldalán nagyban.",
+        help_text=("Ez a kép fog megjelenni az "
+                   "események listájánál kicsiben "
+                   "és az előadás oldalán nagyban."),
         blank=True, null=True,
         )
