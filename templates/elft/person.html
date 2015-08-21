@@ -7,13 +7,6 @@
 
 {% block torzs %}
 
-{%if szemely.arckep %}
-    <p>
-    <img src="{{szemely.arckep.kep.url}}" style="max-width:100%" alt="{{szemely.nev}} arcképe">
-    </p>
-{% endif %}
-
-{%if "" %}
 {%if szemely.email %}
 {%if szemely.nyilvanosemail %}
     <p>
@@ -21,11 +14,23 @@
     </p>
 {% endif %}
 {% endif %}
-{% endif %}
 
 {%if szemely.honlap %}
     <p>
-    <a href="{{szemely.honlap}}">Honlapja</a>
+    <b>Honlapja:</b> <a href="{{szemely.honlap}}">{{szemely.honlap}}</a>
+    </p>
+{% endif %}
+
+{%if szemely.leiras %}
+<div style="background-color:#eea;">
+{{szemely.leiras |safe}}
+</div>
+{% endif %}
+
+
+{%if szemely.arckep %}
+    <p>
+    <img src="{{szemely.arckep.kep.url}}" style="max-width:100%" alt="{{szemely.nev}} arcképe">
     </p>
 {% endif %}
 
