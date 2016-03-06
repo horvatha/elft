@@ -383,7 +383,8 @@ class Eloadas(Esemeny):
         )
     letszam = models.IntegerField(
         "létszám",
-        help_text="A résztvevők létszáma az előadó(k) nélkül.",
+        help_text="A helyszíni résztvevők létszáma az előadó(k) nélkül. "
+                  "Az internetes nézők külön kategóriában lesznek",
         blank=True, null=True)
     kep = models.ForeignKey(
         "Kep",
